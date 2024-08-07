@@ -8,11 +8,11 @@ public interface IPessoaService {
 	
 	public List<Pessoa> recuperarTodasPessoas();
 	
-	public List<Pessoa> recuperarPessoaPorId(Long idPessoa);
+	public Pessoa recuperarPessoaPorId(Long idPessoa);
 	
 	public Pessoa inserirNovaPessoa(Pessoa pessoa);
 	
-	public Pessoa alterarPessoa(Pessoa pessoa);	
+	public Pessoa alterarPessoa(Long idPessoa, Pessoa pessoa);
 	
 	public void removerPessoa(Long idPessoa);
 
