@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "enderecoViaCEP", url = "https://viacep.com.br/ws")
 public interface IEnderecoService {
 
-    @GetMapping("/enderecos/{cep}")
+    @GetMapping("/{cep}/json/")
     EnderecoDTO buscarEnderecoPorCEP(@PathVariable("cep") String cep);
 
 }

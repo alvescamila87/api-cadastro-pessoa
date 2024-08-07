@@ -119,7 +119,7 @@ public class PessoaServiceImpl implements IPessoaService {
 			EnderecoDTO enderecoDTO = enderecoService.buscarEnderecoPorCEP(cep);
 
 			if(enderecoDTO == null || enderecoDTO.getCep() == null) {
-				throw new IllegalArgumentException("Endereço não encontrado para o CEP informado: " + cep);
+				throw new IllegalArgumentException("Endereço não encontrado para o CEP informado: " + pessoa.getEndereco().getCep());
 			}
 
 			Endereco endereco = new Endereco();

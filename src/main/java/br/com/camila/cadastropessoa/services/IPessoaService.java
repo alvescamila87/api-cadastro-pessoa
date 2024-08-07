@@ -3,7 +3,9 @@ package br.com.camila.cadastropessoa.services;
 import java.util.List;
 
 import br.com.camila.cadastropessoa.model.Pessoa;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface IPessoaService {
 	
 	public List<Pessoa> recuperarTodasPessoas();
