@@ -1,6 +1,6 @@
 package br.com.camila.cadastropessoa.services;
 
-import br.com.camila.cadastropessoa.model.Endereco;
+import br.com.camila.cadastropessoa.dto.EnderecoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface IEnderecoService {
 
     @GetMapping("/enderecos/{cep}")
-    Endereco findByCep(@PathVariable("cep") String cep);
+    EnderecoDTO buscarEnderecoPorCEP(@PathVariable("cep") String cep);
 
 }
