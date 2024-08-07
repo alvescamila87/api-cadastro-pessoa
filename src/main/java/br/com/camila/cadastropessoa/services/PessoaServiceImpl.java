@@ -3,6 +3,9 @@ package br.com.camila.cadastropessoa.services;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.camila.cadastropessoa.dto.EnderecoDTO;
+import br.com.camila.cadastropessoa.model.Endereco;
+import br.com.camila.cadastropessoa.repositories.EnderecoRepository;
 import br.com.camila.cadastropessoa.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,12 @@ public class PessoaServiceImpl implements IPessoaService {
 
 	@Autowired
 	private PessoaRepository repository;
+
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+
+	@Autowired
+	private IEnderecoService enderecoService;
 
 	@Override
 	public List<Pessoa> recuperarTodasPessoas() {
@@ -38,8 +47,7 @@ public class PessoaServiceImpl implements IPessoaService {
 	@Override
 	public Pessoa inserirNovaPessoa(Pessoa pessoa) {
 		try {
-			validatePessoa(pessoa);
-			return repository.save(pessoa);
+			salvarPessoaComCEP(pessoa);
 		} catch (IllegalArgumentException e) {
 			System.out.println("DEBUG: " + e.getMessage());
 		}
@@ -52,9 +60,21 @@ public class PessoaServiceImpl implements IPessoaService {
 			Optional<Pessoa> pessoaPesquisada = repository.findById(idPessoa);
 
 			if(pessoaPesquisada.isPresent()) {
-				validatePessoa(pessoa);
-				pessoa.setId(idPessoa);
-				return repository.save(pessoa);
+
+				// Atualiza os dados da pessoa com os novos valores
+				Pessoa pessoaExistente = pessoaPesquisada.get();
+
+				pessoaExistente.setNomeCompleto(pessoa.getNomeCompleto());
+				pessoaExistente.setCpf(pessoa.getCpf());
+				pessoaExistente.setTelefone(pessoa.getTelefone());
+
+				// Atualiza o endereço da pessoa se necessário
+				if (pessoa.getEndereco() != null && pessoa.getEndereco().getCep() != null) {
+					pessoaExistente = salvarPessoaComCEP(pessoaExistente);
+				}
+				validatePessoa(pessoaExistente);
+				pessoaExistente.setId(idPessoa);
+				return repository.save(pessoaExistente);
 			}
 			return null;
 
@@ -77,7 +97,7 @@ public class PessoaServiceImpl implements IPessoaService {
 		}
 	}
 
-	protected void validatePessoa(Pessoa pessoa) {
+	private void validatePessoa(Pessoa pessoa) {
 		if (
 				pessoa != null
 						&& pessoa.getNomeCompleto().trim().isEmpty() && pessoa.getNomeCompleto() != null
@@ -85,8 +105,39 @@ public class PessoaServiceImpl implements IPessoaService {
 						&& pessoa.getTelefone() != null && pessoa.getTelefone().trim().isEmpty()
 						&& pessoa.getEndereco() != null
 		) {
-			throw new IllegalArgumentException("Registro de pessoa inválido");
+			throw new IllegalArgumentException("Registro de pessoa inválido.");
 		}
+	}
+
+	private Pessoa salvarPessoaComCEP(Pessoa pessoa) {
+		try {
+			String cep = pessoa.getEndereco().getCep();
+			if(cep == null || cep.trim().isEmpty()) {
+				throw new IllegalArgumentException("CEP não informado.");
+			}
+
+			EnderecoDTO enderecoDTO = enderecoService.buscarEnderecoPorCEP(cep);
+
+			if(enderecoDTO == null || enderecoDTO.getCep() == null) {
+				throw new IllegalArgumentException("Endereço não encontrado para o CEP informado: " + cep);
+			}
+
+			Endereco endereco = new Endereco();
+			endereco.setCep(enderecoDTO.getCep());
+			endereco.setLogradouro(enderecoDTO.getLogradouro());
+			endereco.setBairro(enderecoDTO.getBairro());
+			endereco.setCidade(enderecoDTO.getLocalidade());
+			endereco.setUf(enderecoDTO.getUf());
+
+			endereco = enderecoRepository.save(endereco);
+			pessoa.setEndereco(endereco);
+			validatePessoa(pessoa);
+			return repository.save(pessoa);
+
+		} catch (IllegalArgumentException e) {
+			System.out.println("DEBUG: " + e.getMessage());
+		}
+		return null;
 	}
 
 }
