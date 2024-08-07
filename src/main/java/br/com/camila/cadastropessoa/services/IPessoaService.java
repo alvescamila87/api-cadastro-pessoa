@@ -2,20 +2,21 @@ package br.com.camila.cadastropessoa.services;
 
 import java.util.List;
 
+import br.com.camila.cadastropessoa.dto.PessoaDTO;
 import br.com.camila.cadastropessoa.model.Pessoa;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface IPessoaService {
 	
-	public List<Pessoa> recuperarTodasPessoas();
+	List<Pessoa> recuperarTodasPessoas();
 	
-	public Pessoa recuperarPessoaPorId(Long idPessoa);
+	Pessoa recuperarPessoaPorId(Long idPessoa);
 	
-	public Pessoa inserirNovaPessoa(Pessoa pessoa);
+	Pessoa salvarPessoa(PessoaDTO pessoa);
 	
-	public Pessoa alterarPessoa(Long idPessoa, Pessoa pessoa);
+	Pessoa atualizar(Long idPessoa, PessoaDTO pessoa);
 	
-	public void removerPessoa(Long idPessoa);
+	void excluirPessoa(Long idPessoa);
 
 }

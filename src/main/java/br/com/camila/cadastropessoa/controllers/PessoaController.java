@@ -1,15 +1,18 @@
 package br.com.camila.cadastropessoa.controllers;
 
+import br.com.camila.cadastropessoa.dto.PessoaDTO;
 import br.com.camila.cadastropessoa.model.Pessoa;
 import br.com.camila.cadastropessoa.services.IPessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/pessoas")
+@RequestMapping("/pessoas")
 public class PessoaController {
 
     @Autowired
@@ -22,22 +25,24 @@ public class PessoaController {
 
     @GetMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> listarPessoaPorId(@PathVariable Long idPessoa){
-        if(idPessoa != null) {
-            return ResponseEntity.ok(pessoaService.recuperarPessoaPorId(idPessoa));
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(pessoaService.recuperarPessoaPorId(idPessoa));
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> inserirNovaPessoa(@RequestBody Pessoa pessoa) {
-        Pessoa resultado = pessoaService.inserirNovaPessoa(pessoa);
-
-        if(resultado != null) {
-            return ResponseEntity.status(201).body(resultado);
-        }
-        return ResponseEntity.badRequest().build();
+    public ResponseEntity<PessoaDTO> inserirNovaPessoa(@RequestBody PessoaDTO pessoaDTO) {
+        pessoaService.salvarPessoa(pessoaDTO);
+        return ResponseEntity.ok(pessoaDTO);
     }
 
     @PutMapping("/{idPessoa}")
-    public Res
+    public ResponseEntity<PessoaDTO> atualizarPessoa(@PathVariable Long idPessoa, @RequestBody PessoaDTO pessoaDTO){
+        pessoaService.atualizar(idPessoa, pessoaDTO);
+        return ResponseEntity.ok(pessoaDTO);
+    }
+
+    @DeleteMapping("/{idPessoa}")
+    public ResponseEntity<Void> deletarPessoa(@PathVariable Long idPessoa){
+        pessoaService.excluirPessoa(idPessoa);
+        return ResponseEntity.noContent().build();
+    }
 }

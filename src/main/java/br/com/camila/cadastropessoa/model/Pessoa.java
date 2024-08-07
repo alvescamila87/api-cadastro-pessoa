@@ -1,10 +1,6 @@
 package br.com.camila.cadastropessoa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -22,6 +18,7 @@ public class Pessoa {
 	private String telefone;
 	
 	@ManyToOne
+	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 }
