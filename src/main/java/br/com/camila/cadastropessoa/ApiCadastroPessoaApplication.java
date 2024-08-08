@@ -8,7 +8,6 @@ import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 
 @SpringBootApplication
 @EnableFeignClients
-@ImportAutoConfiguration({FeignAutoConfiguration.class})
 public class ApiCadastroPessoaApplication {
 
 	public static void main(String[] args) {
