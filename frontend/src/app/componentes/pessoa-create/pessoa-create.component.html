@@ -1,0 +1,20 @@
+<h2>Cadastrar Pessoa</h2>
+<form (ngSubmit)="savePessoa()">
+  <div>
+    <label>Nome Completo:</label>
+    <input [(ngModel)]="pessoa.nomeCompleto" name="nomeCompleto" required />
+  </div>
+  <div>
+    <label>CPF:</label>
+    <input [(ngModel)]="pessoa.cpf" name="cpf" required />
+  </div>
+  <div>
+    <label>Telefone:</label>
+    <input [(ngModel)]="pessoa.telefone" name="telefone" required />
+  </div>
+  <div>
+    <label>CEP:</label>
+    <input [(ngModel)]="pessoa.cep" name="cep" required />
+  </div>
+  <button type="submit">Salvar</button>
+</form>
