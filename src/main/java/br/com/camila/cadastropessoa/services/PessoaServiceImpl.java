@@ -69,7 +69,7 @@ public class PessoaServiceImpl implements IPessoaService {
 		novaPessoa.setNomeCompleto(pessoaDTO.getNomeCompleto());
 
 		if (!ValidaCPF.isCPF(pessoaDTO.getCpf())) {
-			throw new IllegalArgumentException("CPF " + pessoaDTO.getCpf() + " informado é inválido. Tente novamente.");
+			throw new IllegalArgumentException("O CPF informado: " + pessoaDTO.getCpf() + " é inválido.");
 		}
 
 		novaPessoa.setCpf(pessoaDTO.getCpf());
