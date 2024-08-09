@@ -1,1 +1,8 @@
-<p>pessoa-list works!</p>
+<h2>Lista de Pessoas</h2>
+<ul>
+  <li *ngFor="let pessoa of pessoas">
+    {{ pessoa.nomeCompleto }} - {{ pessoa.cpf }}
+    <button>Deletar</button>
+    <!-- <button (click)="deletePessoa(pessoa.id)"</button>>Deletar</button> -->
+  </li>
+</ul>
