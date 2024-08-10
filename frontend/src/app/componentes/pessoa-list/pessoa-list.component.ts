@@ -34,17 +34,17 @@ export class PessoaListComponent implements OnInit{
   }
 
   showDetailsPessoa(pessoa: PessoaDTO): void {
-    console.log("FUI ACIONADO: BOTÃO DETALHES");
+    //console.log("FUI ACIONADO: BOTÃO DETALHES");
     this.pessoaSelected = pessoa;
   }
 
   editPessoa(pessoa: PessoaDTO): void {
-    console.log("Entrou no editar" +  pessoa)
+    //console.log("Entrou no editar" +  pessoa)
     this.pessoaSelected = pessoa;
   }
 
   deletePessoa(id: number): void {
-    console.log("FUI ACIONADO: BOTÃO DELETAR");
+    //console.log("FUI ACIONADO: BOTÃO DELETAR");
     if (confirm('Você tem certeza que deseja excluir esta pessoa?')) {
       this.pessoaService.deletePessoa(id).subscribe(() => {
         this.pessoas = this.pessoas.filter(p => p.id !== id);
@@ -66,7 +66,7 @@ export class PessoaListComponent implements OnInit{
     }
 
     savePessoa(): void {
-      console.log("SALVAR DA EDIÇÃO: Acionado");
+      //console.log("SALVAR DA EDIÇÃO: Acionado");
       if(this.validateCEP() && this.validateCPF()) {
         this.pessoaService.createPessoa(this.pessoaSelected).subscribe({
           next: () => {

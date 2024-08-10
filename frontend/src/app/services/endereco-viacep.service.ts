@@ -11,6 +11,7 @@ export class EnderecoVIACEPService {
   constructor(private http: HttpClient) { }
 
   public getCEP(cep: string): Observable<EnderecoDTO> {
+    //console.log("VIACEP: API EXTERNA");
     return this.http.get<EnderecoDTO>("https://viacep.com.br/ws/"+`${cep}`+"/json")
   }
 
