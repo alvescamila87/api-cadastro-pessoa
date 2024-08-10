@@ -1,0 +1,9 @@
+br.com.camila.cadastropessoa
+br.com.camila.cadastropessoa.config
+br.com.camila.cadastropessoa.controllers
+br.com.camila.cadastropessoa.dto
+br.com.camila.cadastropessoa.exception
+br.com.camila.cadastropessoa.model
+br.com.camila.cadastropessoa.repositories
+br.com.camila.cadastropessoa.services
+br.com.camila.cadastropessoa.utils
