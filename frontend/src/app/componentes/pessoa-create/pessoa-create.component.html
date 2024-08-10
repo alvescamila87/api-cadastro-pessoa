@@ -13,15 +13,13 @@
         <div class="col-6">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">CPF </label>
-            <input type="text" class="form-control" [(ngModel)]="pessoa.cpf" name="cpf" placeholder="000.000.000-00"
-              required>
+            <input type="text" class="form-control" (change)="validateCPF()" [(ngModel)]="pessoa.cpf" name="cpf" placeholder="000.000.000-00" required>
           </div>
         </div>
         <div class="col-6">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Telefone </label>
-            <input type="text" class="form-control" [(ngModel)]="pessoa.telefone" name="telefone"
-              placeholder="(00) 00000-0000" required>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.telefone" name="telefone" placeholder="(00) 00000-0000" required>
           </div>
         </div>
       </div>
@@ -35,7 +33,7 @@
       <div class="col-6">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">CEP</label>
-          <input type="text" class="form-control" (change)="buscarCEP()" [(ngModel)]="pessoa.endereco.cep" name="cep" required
+          <input type="text" class="form-control" (change)="validateCEP()" (change)="buscarCEP()" [(ngModel)]="pessoa.endereco.cep" name="cep" required
             placeholder="00000-0000">
         </div>
       </div>

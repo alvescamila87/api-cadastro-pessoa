@@ -5,6 +5,7 @@ import { PessoaService } from '../../services/pessoa.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EnderecoVIACEPService } from '../../services/endereco-viacep.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pessoa-list',
@@ -53,25 +54,73 @@ export class PessoaListComponent implements OnInit{
   }
 
   buscarCEP(): void {
-    this.enderecoService.getCEP(this.pessoaSelected.endereco.cep).subscribe({
-      next: (res: EnderecoDTO) => {
-        //console.log(res);
-        this.pessoaSelected.endereco = res;
-        this.pessoaSelected.endereco.complemento = this.pessoaSelected.endereco.complemento;
-        }
-      });
+    if(this.validateCEP()){
+      this.enderecoService.getCEP(this.pessoaSelected.endereco.cep).subscribe({
+        next: (res: EnderecoDTO) => {
+          //console.log(res);
+          this.pessoaSelected.endereco = res;
+          this.pessoaSelected.endereco.complemento = this.pessoaSelected.endereco.complemento;
+          }
+        });
+      }
     }
 
     savePessoa(): void {
-      console.log("SALVAR: Acionado");
-      this.pessoaService.createPessoa(this.pessoaSelected).subscribe(() => {
-        alert("Dados alterados com sucesso!");
-      })
-      console.log("SALVAR: após this");
+      console.log("SALVAR DA EDIÇÃO: Acionado");
+      if(this.validateCEP() && this.validateCPF()) {
+        this.pessoaService.createPessoa(this.pessoaSelected).subscribe({
+          next: () => {
+            alert("Dados alterados com sucesso!");
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(`O CEP `+ this.pessoaSelected.cpf + ` informado já possui cadastro. Tente um CPF diferente.`);
+            console.error('Erro ao salvar a pessoa: ' + error);
+          }
+        })
+      } else {
+        alert("Campos obrigatórios não preenchidos. Tente novamente.")
+      }
     }
 
     refreshEdit(): void{
       //this.ngOnInit();
       window.location.reload();
     }
+
+
+  validateCPF(): boolean {
+    const cpf = this.pessoaSelected.cpf.replace(/\D/g, '');
+    if(cpf.length != 11) {
+      alert('O CPF ' + cpf + ' é inválido. Deve conter 11 digitos.');
+      return false;
+    }
+    return true;
   }
+
+  validateCEP(): boolean {
+    const cep = this.pessoaSelected.endereco.cep.replace(/\D/g, '');
+    if(cep.length != 8) {
+      alert('O CEP ' + cep + ' é inválido. Deve conter 8 digitos.');
+      return false;
+    }
+    return true;
+  }
+
+  filterSearch(id: number): void {
+    if (id > 0) {
+      this.pessoaService.getPessoaById(id).subscribe(
+        (pessoa) => {
+          this.pessoas = [pessoa];
+        },
+        (error) => {
+          console.error('Erro ao buscar pessoa:', error);
+          this.pessoas = [];
+        }
+      );
+    } else {
+      alert('ID inválido. Tente novamente.')
+      this.loadPessoas();
+    }
+  }
+
+}
