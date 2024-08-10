@@ -2,6 +2,15 @@ package br.com.camila.cadastropessoa.utils;
 
 import java.util.InputMismatchException;
 
+/**
+ * Classe utilitária para validação e formatação de CPF.
+ * <p>
+ * A classe {@code ValidaCPF} fornece métodos para validar um número de CPF e formatar um CPF em uma representação legível.
+ * </p>
+ *
+ * @author Internet: jdevtreinamento (youtube)
+ * @since V1
+ */
 public class ValidaCPF {
 
     public static boolean isCPF(String CPF) {

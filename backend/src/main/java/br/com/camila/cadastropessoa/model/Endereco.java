@@ -9,6 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Representa um endereço de localização do Brasil no sistema.
+ * A classe {@code Endereco} mapeia uma entidade do banco de dados e contém informações
+ * detalhadas sobre o endereço, como CEP, logradouro, número bairro, cidade e UF e outros
+ * atributos relacionados mantidos caso houver interesse em consutá-los.
+ *
+ * @see Pessoa
+ *
+ * @author Camila
+ * @since V1
+ */
 @Entity
 @Getter
 @Setter
