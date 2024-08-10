@@ -1,12 +1,13 @@
+<!-- Lista de pessoas -->
 <h2>Listar Pessoas</h2>
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Telefone</th>
-      <th>Ações</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -16,34 +17,128 @@
       <td>{{ pessoa.cpf }}</td>
       <td>{{ pessoa.telefone }}</td>
       <td>
-        <button id="detalhes-button" (click)="showDetailsPessoa(pessoa)">Detalhes</button>
-        <button id="editar-button" (click)="editPessoa(pessoa)" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
-        <button id="deletar-button" (click)="deletePessoa(pessoa.id)">Deletar</button>
+          <button id="detalhes-button" class="btn btn-secondary me-2" (click)="showDetailsPessoa(pessoa)" data-bs-toggle="modal" data-bs-target="#modalDetalhes">Detalhes</button>
+          <button id="editar-button" class="btn btn-primary me-2" (click)="editPessoa(pessoa)" data-bs-toggle="modal" data-bs-target="#modalEdicao">Editar</button>
+          <button id="deletar-button" class="btn btn-danger me-2" (click)="deletePessoa(pessoa.id)">Deletar</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<!-- Modal de Detalhes
-<app-pessoa-modal
-  *ngIf="pessoaSelected"
-  [pessoa]="pessoaSelected"
-  (close)="closeModal()">
-</app-pessoa-modal> -->
-
-<!-- Modal Edição -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal de Detalhes -->
+<div class="modal fade" id="modalDetalhes" tabindex="-1" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar cadastro pessoa</h1>
+        <h1 class="modal-title fs-5">Detalhes da pessoa</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <!-- formulário pessoa-->
           <div class="row m-3 p-3 border">
-            <h5>Informações de cadastro da pessoa</h5>
+            <h5>Informações da pessoa</h5>
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nome completo </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.nomeCompleto" name="nomeCompleto" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">CPF </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.cpf" name="cpf" placeholder="000.000.000-00"
+                    disabled>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Telefone </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.telefone" name="telefone"
+                      placeholder="(00) 00000-0000" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- formulário endereço -->
+          <div class="row m-3 p-3 border">
+            <h5>Endereço</h5>
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">CEP</label>
+                  <input type="text" class="form-control" (change)="buscarCEP()" [(ngModel)]="pessoaSelected.endereco.cep" name="cep" disabled
+                    placeholder="00000-0000">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Número </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.numero" name="numero" disabled>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Logradouro </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.logradouro" name="logradouro" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Complemento </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.complemento" name="complemento" disabled>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Bairro </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.bairro" name="bairro" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Cidade </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.localidade" name="cidade" disabled>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">UF </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.uf" name="uf" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edição -->
+<div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Edição de dados pessoa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <!-- formulário pessoa-->
+          <div class="row m-3 p-3 border">
+            <h5>Informações da pessoa</h5>
             <div class="row">
               <div class="col-12">
                 <div class="mb-3">

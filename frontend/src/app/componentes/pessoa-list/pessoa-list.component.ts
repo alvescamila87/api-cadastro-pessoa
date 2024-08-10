@@ -4,13 +4,12 @@ import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../../services/pessoa.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PessoaModalComponent } from '../pessoa-modal/pessoa-modal.component';
 import { EnderecoVIACEPService } from '../../services/endereco-viacep.service';
 
 @Component({
   selector: 'app-pessoa-list',
   standalone: true,
-  imports: [FormsModule, CommonModule, PessoaModalComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './pessoa-list.component.html',
   styleUrl: './pessoa-list.component.css'
 })
@@ -43,13 +42,9 @@ export class PessoaListComponent implements OnInit{
     this.pessoaSelected = pessoa;
   }
 
-  /*closeModal(): void {
-    this.pessoaSelected = pessoa;
-  }*/
-
   deletePessoa(id: number): void {
     console.log("FUI ACIONADO: BOTÃO DELETAR");
-    if (confirm('Você tem certeza que deseja deletar esta pessoa?')) {
+    if (confirm('Você tem certeza que deseja excluir esta pessoa?')) {
       this.pessoaService.deletePessoa(id).subscribe(() => {
         this.pessoas = this.pessoas.filter(p => p.id !== id);
         this.loadPessoas();
