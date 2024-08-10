@@ -1,0 +1,74 @@
+/* Estilo geral da tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Estilo para o cabeçalho da tabela */
+thead {
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ddd;
+}
+
+th {
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Estilo para as células da tabela */
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para as linhas da tabela */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo para os botões */
+button {
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#detalhes-button {
+  background-color: gray;
+}
+
+#detalhes-button:hover {
+  background-color: lightgray;
+}
+
+#editar-button {
+  background-color: #007bff;
+}
+
+#editar-button:hover {
+  background-color: #0056b3;
+}
+
+#deletar-button {
+  background-color: #dc3545;
+}
+
+#deletar-button:hover {
+  background-color: #c82333;
+}
+

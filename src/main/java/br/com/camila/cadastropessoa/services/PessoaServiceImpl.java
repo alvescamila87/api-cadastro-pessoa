@@ -8,7 +8,6 @@ import br.com.camila.cadastropessoa.dto.PessoaDTO;
 import br.com.camila.cadastropessoa.model.Endereco;
 import br.com.camila.cadastropessoa.repositories.EnderecoRepository;
 import br.com.camila.cadastropessoa.repositories.PessoaRepository;
-import br.com.camila.cadastropessoa.utils.LimpaCEP;
 import br.com.camila.cadastropessoa.utils.ValidaCPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,6 @@ public class PessoaServiceImpl implements IPessoaService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
-	@Autowired
-	private IEnderecoService enderecoService;
 
 	@Override
 	public List<Pessoa> recuperarTodasPessoas() {
@@ -75,14 +71,8 @@ public class PessoaServiceImpl implements IPessoaService {
 		novaPessoa.setCpf(pessoaDTO.getCpf());
 		novaPessoa.setTelefone(pessoaDTO.getTelefone());
 
-		String cepLimpo = LimpaCEP.limpaCep(pessoaDTO.getCep());
-
-		Endereco endereco = enderecoRepository.findById(pessoaDTO.getEnderecoId()).orElseGet(() -> {
-					Endereco novoEndereco = enderecoService.buscarEnderecoPorCEP(cepLimpo);
-					enderecoRepository.save(novoEndereco);
-					return novoEndereco;
-				});
-        novaPessoa.setEndereco(endereco);
+		Endereco novoEndereco = enderecoRepository.save(pessoaDTO.getEndereco());
+		novaPessoa.setEndereco(novoEndereco);
 
 		pessoaRepository.save(novaPessoa);
         return novaPessoa;

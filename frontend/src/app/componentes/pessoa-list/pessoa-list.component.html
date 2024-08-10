@@ -1,8 +1,26 @@
-<h2>Lista de Pessoas</h2>
-<ul>
-  <li *ngFor="let pessoa of pessoas">
-    {{ pessoa.nomeCompleto }} - {{ pessoa.cpf }}
-    <button>Deletar</button>
-    <!-- <button (click)="deletePessoa(pessoa.id)"</button>>Deletar</button> -->
-  </li>
-</ul>
+<h2>Listar Pessoas</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pessoa of pessoas">
+      <td>{{ pessoa.id }}</td>
+      <td>{{ pessoa.nomeCompleto }}</td>
+      <td>{{ pessoa.cpf }}</td>
+      <td>{{ pessoa.telefone }}</td>
+      <td>
+        <button id="detalhes-button" (click)="showDetailsPessoa(pessoa)">Detalhes</button>
+        <button id="editar-button" (click)="editPessoa(pessoa)" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
+        <button id="deletar-button" (click)="deletePessoa(pessoa.id)">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

@@ -1,5 +1,6 @@
 package br.com.camila.cadastropessoa.dto;
 
+import br.com.camila.cadastropessoa.model.Endereco;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,6 @@ public class PessoaDTO {
     private String nomeCompleto;
     private String cpf;
     private String telefone;
-    private Long enderecoId;
-    private String cep;
+    private Endereco endereco;
+
 }

@@ -1,20 +1,91 @@
-<h2>Cadastrar Pessoa</h2>
-<form (ngSubmit)="savePessoa()">
-  <div>
-    <label>Nome Completo:</label>
-    <input [(ngModel)]="pessoa.nomeCompleto" name="nomeCompleto" required />
+<div class="container-fluid">
+  <!-- formulário pessoa-->
+  <div class="row m-3 p-3 border">
+    <h5>Informações de cadastro da pessoa</h5>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nome completo </label>
+          <input type="text" class="form-control" [(ngModel)]="pessoa.nomeCompleto" name="nomeCompleto" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">CPF </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.cpf" name="cpf" placeholder="000.000.000-00"
+              required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Telefone </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.telefone" name="telefone"
+              placeholder="(00) 00000-0000" required>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <label>CPF:</label>
-    <input [(ngModel)]="pessoa.cpf" name="cpf" required />
+
+  <!-- formulário endereço -->
+  <div class="row m-3 p-3 border">
+    <h5>Endereço</h5>
+    <div class="row">
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">CEP</label>
+          <input type="text" class="form-control" (change)="buscarCEP()" [(ngModel)]="pessoa.endereco.cep" name="cep" required
+            placeholder="00000-0000">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Número </label>
+          <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.numero" name="numero" required>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Logradouro </label>
+          <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" readonly
+            required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Complemento </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.complemento" name="complemento">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Bairro </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.bairro" name="bairro" readonly
+              required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Cidade </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.localidade" name="cidade" readonly
+              required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">UF </label>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.uf" name="uf" readonly required>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-success" (click)="savePessoa()">Salvar</button>
+      </div>
+    </div>
   </div>
-  <div>
-    <label>Telefone:</label>
-    <input [(ngModel)]="pessoa.telefone" name="telefone" required />
-  </div>
-  <div>
-    <label>CEP:</label>
-    <input [(ngModel)]="pessoa.cep" name="cep" required />
-  </div>
-  <button type="submit">Salvar</button>
-</form>
