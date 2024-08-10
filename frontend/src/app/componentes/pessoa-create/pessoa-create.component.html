@@ -48,8 +48,7 @@
       <div class="col-12">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Logradouro </label>
-          <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" readonly
-            required>
+          <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.logradouro" name="logradouro" disabled>
         </div>
       </div>
       <div class="row">
@@ -62,8 +61,7 @@
         <div class="col-6">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Bairro </label>
-            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.bairro" name="bairro" readonly
-              required>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.bairro" name="bairro" disabled>
           </div>
         </div>
       </div>
@@ -71,14 +69,13 @@
         <div class="col-6">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Cidade </label>
-            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.localidade" name="cidade" readonly
-              required>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.localidade" name="cidade" disabled>
           </div>
         </div>
         <div class="col-6">
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">UF </label>
-            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.uf" name="uf" readonly required>
+            <input type="text" class="form-control" [(ngModel)]="pessoa.endereco.uf" name="uf" disabled>
           </div>
         </div>
       </div>

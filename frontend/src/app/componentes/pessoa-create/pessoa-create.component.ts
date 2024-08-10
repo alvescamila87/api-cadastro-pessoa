@@ -4,6 +4,7 @@ import { PessoaDTO } from '../../model/PessoaDTO';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EnderecoDTO } from '../../model/EnderecoDTO';
+import { EnderecoVIACEPService } from '../../services/endereco-viacep.service';
 
 @Component({
   selector: 'app-pessoa-create',
@@ -35,7 +36,7 @@ export class PessoaCreateComponent {
     }
   };
 
-  constructor(private pessoaService: PessoaService, private router: Router) {}
+  constructor(private pessoaService: PessoaService, private router: Router, private enderecoService: EnderecoVIACEPService) {}
 
   savePessoa(): void {
     console.log("SALVAR: Acionado");
@@ -46,7 +47,7 @@ export class PessoaCreateComponent {
   }
 
   buscarCEP(): void {
-    this.pessoaService.getCEP(this.pessoa.endereco.cep).subscribe({
+    this.enderecoService.getCEP(this.pessoa.endereco.cep).subscribe({
       next: (res: EnderecoDTO) => {
         //console.log(res);
         this.pessoa.endereco = res;

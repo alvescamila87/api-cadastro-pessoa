@@ -38,8 +38,4 @@ export class PessoaService {
     return this.http.delete<void>(`${this.urlAPI}/${id}`);
   }
 
-  public getCEP(cep: string): Observable<EnderecoDTO> {
-    return this.http.get<EnderecoDTO>("https://viacep.com.br/ws/"+`${cep}`+"/json");
-  }
-
 }

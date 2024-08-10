@@ -24,3 +24,110 @@
   </tbody>
 </table>
 
+<!-- Modal de Detalhes
+<app-pessoa-modal
+  *ngIf="pessoaSelected"
+  [pessoa]="pessoaSelected"
+  (close)="closeModal()">
+</app-pessoa-modal> -->
+
+<!-- Modal Edição -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar cadastro pessoa</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <!-- formulário pessoa-->
+          <div class="row m-3 p-3 border">
+            <h5>Informações de cadastro da pessoa</h5>
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Nome completo </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.nomeCompleto" name="nomeCompleto" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">CPF </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.cpf" name="cpf" placeholder="000.000.000-00"
+                      required>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Telefone </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.telefone" name="telefone"
+                      placeholder="(00) 00000-0000" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- formulário endereço -->
+          <div class="row m-3 p-3 border">
+            <h5>Endereço</h5>
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">CEP</label>
+                  <input type="text" class="form-control" (change)="buscarCEP()" [(ngModel)]="pessoaSelected.endereco.cep" name="cep" required
+                    placeholder="00000-0000">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Número </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.numero" name="numero" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Logradouro </label>
+                  <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.logradouro" name="logradouro" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Complemento </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.complemento" name="complemento">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Bairro </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.bairro" name="bairro" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Cidade </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.localidade" name="cidade" disabled>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">UF </label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoaSelected.endereco.uf" name="uf" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refreshEdit()">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="savePessoa()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
