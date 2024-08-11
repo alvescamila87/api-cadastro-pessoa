@@ -47,11 +47,12 @@ public class CSVFileGeneratorImpl implements ICSVFileService{
         try (FileWriter fw = new FileWriter(file, false)) {
 
             if (file.length() == 0) {
-                fw.write("Nome;CPF;Telefone;Logradouro;Numero;Complemento;Bairro;Cidade;Estado;CEP\n");
+                fw.write("ID;Nome;CPF;Telefone;Logradouro;Numero;Complemento;Bairro;Cidade;Estado;CEP\n");
             }
 
             for (Pessoa pessoa : listaPessoas) {
-                String linha = pessoa.getNomeCompleto() + ";" +
+                String linha = pessoa.getId() + ";" +
+                        pessoa.getNomeCompleto() + ";" +
                         pessoa.getCpf() + ";" +
                         pessoa.getTelefone() + ";" +
                         pessoa.getEndereco().getLogradouro() + ";" +
