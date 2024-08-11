@@ -24,7 +24,7 @@ Desenvolvimento de uma aplicação API Rest
 ![image](https://github.com/user-attachments/assets/48981ff8-d8bb-47d5-8b9d-e424638ab199)
 
 #### Swagger
-![image](https://github.com/user-attachments/assets/453adf8e-d261-4696-a76a-8fc9d4985aed)
+![image](https://github.com/user-attachments/assets/f65f5fab-aec2-46b6-a1d6-83d14dfa5f97)
 
 #### Kanban board
 ![image](https://github.com/user-attachments/assets/05641bfc-b84b-48b7-a58b-8f765534079a)
