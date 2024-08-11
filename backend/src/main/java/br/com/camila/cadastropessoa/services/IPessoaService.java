@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.camila.cadastropessoa.dto.PessoaDTO;
 import br.com.camila.cadastropessoa.model.Pessoa;
-import org.springframework.stereotype.Service;
 /**
  * Interface de serviço para a entidade {@link Pessoa}.
  * <p>
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
  * @author Camila
  * @since V1
  */
-@Service
 public interface IPessoaService {
 	/**
 	 * Recupera todas as pessoas do sistema.

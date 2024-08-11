@@ -1,5 +1,7 @@
 package br.com.camila.cadastropessoa.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.InputMismatchException;
 
 /**
@@ -11,6 +13,7 @@ import java.util.InputMismatchException;
  * @author Internet: jdevtreinamento (youtube)
  * @since V1
  */
+@Component
 public class ValidaCPF {
 
     public static boolean isCPF(String CPF) {
