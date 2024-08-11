@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PessoaDTO } from '../model/PessoaDTO';
-import { EnderecoDTO } from '../model/EnderecoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +35,11 @@ export class PessoaService {
   public deletePessoa(id: number): Observable<void>{
     //console.log("Estou no PESSOASERVICE - DELETE: Entrei em contato com o Backend")
     return this.http.delete<void>(`${this.urlAPI}/${id}`);
+  }
+
+  public reportCSV(): Observable<Blob>{
+    console.log("Estou no PESSOASERVICE - RELATORIO: Entrei em contato com o Backend")
+    return this.http.get(`${this.urlAPI}/relatorio`, { responseType: 'blob' });
   }
 
 }
