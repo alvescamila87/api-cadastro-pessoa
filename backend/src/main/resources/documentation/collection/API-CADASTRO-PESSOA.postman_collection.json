@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "ca5f799e-d9b8-48ad-9d91-f81a469dcfbe",
+		"name": "API-CADASTRO-PESSOA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32310277"
+	},
+	"item": [
+		{
+			"name": "Consulta de pessoas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pessoas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta de pessoa por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/pessoas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar nova pessoa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"nomeCompleto\": \"Warley\",\r\n    \"cpf\": \"694.758.230-00\",\r\n    \"telefone\": \"561616516\",\r\n    \"endereco\": {\r\n        \"cep\": \"89030-311\",\r\n        \"logradouro\": \"Rua Udo Wachholz\",\r\n        \"complemento\": \"apto 403\",\r\n        \"unidade\": \"\",\r\n        \"bairro\": \"Itoupava Seca\",\r\n        \"localidade\": \"Blumenau\",\r\n        \"uf\": \"SC\",\r\n        \"ibge\": \"4202404\",\r\n        \"gia\": \"\",\r\n        \"ddd\": \"47\",\r\n        \"siafi\": \"8047\",\r\n        \"numero\": \"49\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pessoas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar pessoa por ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nomeCompleto\": \"Maria Silva Alves\",\r\n    \"cpf\": \"123.456.789-99\",\r\n    \"telefone\": \"(47) 99999-9999\",\r\n    \"enderecoId\": 1,\r\n    \"cep\": \"89030290\"\r\n     \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pessoas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar pessoa por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nomeCompleto\": \"Maria Silva Alves\",\r\n    \"cpf\": \"123.456.789-99\",\r\n    \"telefone\": \"(47) 99999-9999\",\r\n    \"enderecoId\": 1,\r\n    \"cep\": \"89030290\"\r\n     \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/pessoas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pessoas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
