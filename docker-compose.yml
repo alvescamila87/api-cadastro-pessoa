@@ -16,37 +16,29 @@ services:
       - api-cadastro-pessoa
 
   backend:
-    build:
-      context: ./
-      dockerfile: Dockerfile
     container_name: backend
-    #image: alvescamila87/backend:1.0.0
+    image: alvescamila87/backend:1.0.0
     depends_on:
       - db
     links:
       - db
     ports:
-      - "8080:8080"
+      - "9000:9000"
     environment:
-      #DATABASE_CONNECTION_URL: jdbc:postgresql://db:5432/db_pessoas
       DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-      #SCOPE: dev
+      DATABASE_PASSWORD: postgres      
     networks:
       - api-cadastro-pessoa      
 
-#  frontend:
-#    build:
-#      context: ./frontend
-#      dockerfile: Dockerfile
-#    container_name: frontend
-#    image: alvescamila87/frontend:1.0.0
-#    ports:
-#      - "80:80"
-#    depends_on:
-#      - backend
-#    networks:
-#      - api-cadastro-pessoa
+  frontend:
+    container_name: frontend
+    image: alvescamila87/frontend:1.0.0
+    ports:
+      - "3000:8080"
+    depends_on:
+      - backend
+    networks:
+      - api-cadastro-pessoa
 
 networks:
   api-cadastro-pessoa:

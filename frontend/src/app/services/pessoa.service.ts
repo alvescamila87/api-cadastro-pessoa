@@ -8,7 +8,7 @@ import { PessoaDTO } from '../model/PessoaDTO';
 })
 export class PessoaService {
 
-  private urlAPI = 'http://localhost:8080/pessoas';
+  private urlAPI = 'http://localhost:9000/pessoas';
 
   constructor(private http: HttpClient) { }
 
