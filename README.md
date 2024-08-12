@@ -62,7 +62,7 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 #### Método POST (Salvar)
 - **URL**: [http://localhost:9000/pessoas](http://localhost:9000/pessoas)
 - **Descrição**: Cria uma nova pessoa. Caso o `enderecoId` não exista no banco de dados, a aplicação busca o endereço no ViaCEP e o salva.
-- **Estrutura JSON**:
+- **Estrutura JSON do Body**:
   ```json
   {
       "nomeCompleto": "",
@@ -85,33 +85,8 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 
 #### Método GET (Busca por ID)
 - **URL**: [http://localhost:9000/pessoas/{id}](http://localhost:9000/pessoas{id})
-- **Descrição**: Retorna a lista de todas as pessoas cadastradas.
-- **Estrutura JSON**:
-  ```json
-  {
-      "id": 1,
-      "nomeCompleto": "",
-      "cpf": "",
-      "telefone": "",
-      "endereco": {
-          "cep": "",
-          "logradouro": "",
-          "numero": "",
-          "complemento": "",
-          "bairro": "",
-          "localidade": "",
-          "uf": "",
-          "ibge": "",
-          "gia": "",
-          "ddd": "",
-          "siafi": ""
-      }
-  }
-
-#### Método GET (Listar)
-- **URL**: [http://localhost:9000/pessoas/](http://localhost:9000/pessoas)
-- **Descrição**: Retorna a lista de todas as pessoas cadastradas.
-- **Estrutura JSON**:
+- **Descrição**: Retorna a pesssoa do ID fornecido.
+- **Estrutura JSON retornada**:
   ```json
   {
       "id": 1,
@@ -133,6 +108,33 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
           "siafi": ""
       }
   }
+#### Método GET (Listar)
+- **URL**: [http://localhost:9000/pessoas/](http://localhost:9000/pessoas)
+- **Descrição**: Retorna a lista de todas as pessoas cadastradas.
+- **Estrutura JSON retornada**:
+  ```json
+  [
+    {
+        "id": 1,
+        "nomeCompleto": "Zebedeu Abraão",
+        "cpf": "02100000000",
+        "telefone": "47-9999-5555",
+        "endereco": {
+            "id": 1,
+            "cep": "00000-000",
+            "logradouro": "Rua Israel",
+            "numero": "7",
+            "complemento": "Próximo à igreja",
+            "bairro": "Europa",
+            "localidade": "Blumenau",
+            "uf": "SC",
+            "ibge": "",
+            "gia": "",
+            "ddd": "",
+            "siafi": ""
+        }
+    }
+]
 
 #### Método DELETE (Excluir)
 - **URL**: [http://localhost:9000/pessoas/{id}](http://localhost:9000/pessoas{id})
@@ -140,8 +142,8 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
   
 #### Método PUT (Atualizar)
 - **URL**: [http://localhost:9000/pessoas/{id}](http://localhost:9000/pessoas{id})
-- **Descrição**: Atualiza um cliente existente. Caso o enderecoId não exista no banco de dados, a aplicação busca o endereço no ViaCEP e o salva.
-- **Estrutura JSON**:
+- **Descrição**: Atualiza uma pessoa existente. Caso o enderecoId não exista no banco de dados, a aplicação busca o endereço no ViaCEP e o salva.
+- **Estrutura JSON do Body**:
   ```json
   {
       "id": 1,
