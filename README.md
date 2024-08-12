@@ -47,6 +47,11 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
    git clone https://github.com/alvescamila87/api-cadastro-pessoa.git
    cd api-cadastro-pessoa
 
+2. **Executar via Docker compose**
+
+   ```bash
+   docker-compose up
+
 #### Acesso à aplicação  
 - **Frontend**: Abra seu navegador e acesse [http://localhost:3000](http://localhost:3000).
 - **Backend**: O backend estará disponível em [http://localhost:9000](http://localhost:9000).
