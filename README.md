@@ -1,20 +1,20 @@
 # Cadastro de Pessoas integrado ao VIACEP
 
-## Sobre o projeto          
+## :page_facing_up: Sobre o projeto          
 Aplicação desenvolvida para permitir um cadastro de pessoas com as operações de consulta, criação, edição e deleção de registros. 
 Possui validação de CPF para pessoas físicas.
 Ao cadastrar o endereço da pessoa, o CEP busca automaticamente os dados de localização, caso estiverem corretos.
 Possui relatório em CSV das pessoas cadastradas.
 
-## DER
+## :paperclips: DER
 Diagrama de Entidade e Relacionamento
 
 ![image](https://github.com/user-attachments/assets/04b9292b-660f-482b-a464-90a91986f892)
 
-## Informação técnica <img align="center" alt="karen-java" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"><img align="center" alt="karen-spring" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg">             <img align="center" alt="karen-spring" height="35" width="45" img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" />
+## :page_facing_up: Informações técnics <img align="center" alt="karen-java" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"><img align="center" alt="karen-spring" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg">             <img align="center" alt="karen-spring" height="35" width="45" img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" />
 Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e Angular para o frontend. A aplicação é containerizada usando Docker e orquestrada com Docker Compose.
 
-## Stacks
+## :hammer: Stacks
 * Angular
 * Bootstrap
 * Java JDK 17
@@ -29,17 +29,17 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 * Docker Hub
 * GitHub Projects
 
-## Executando o backend
+## :gear: Executando o backend
 
-#### Imagens Docker
+#### :framed_picture: Imagens Docker
 - **Frontend**: [alvescamila87/frontend:1.0.0](https://hub.docker.com/r/alvescamila87/frontend)
 - **Backend**: [alvescamila87/backend:1.0.0](https://hub.docker.com/r/alvescamila87/backend)
 
-#### Requisitos
+#### :pushpin: Requisitos
 - Docker
 - Docker Compose
 
-#### Configuração do Projeto
+#### :gear: Configuração do Projeto
 
 1. **Clone o repositório**
 
@@ -57,7 +57,7 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 - **Backend**: O backend estará disponível em [http://localhost:9000](http://localhost:9000).
 - **Documentação da API (Swagger)**: Acesse [http://localhost:9000/swagger-ui.html](http://localhost:9000/swagger-ui.html) para ver a documentação da API.
 
-## Para testes de Backend
+## :construction: Para testes de Backend
 
 #### Método POST (Salvar)
 - **URL**: [http://localhost:9000/pessoas](http://localhost:9000/pessoas)
@@ -114,27 +114,27 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 - **Estrutura JSON retornada**:
   ```json
   [
-    {
-        "id": 1,
-        "nomeCompleto": "Zebedeu Abraão",
-        "cpf": "02100000000",
-        "telefone": "47-9999-5555",
-        "endereco": {
-            "id": 1,
-            "cep": "00000-000",
-            "logradouro": "Rua Israel",
-            "numero": "7",
-            "complemento": "Próximo à igreja",
-            "bairro": "Europa",
-            "localidade": "Blumenau",
-            "uf": "SC",
-            "ibge": "",
-            "gia": "",
-            "ddd": "",
-            "siafi": ""
-        }
-    }
-]
+       {
+           "id": 1,
+           "nomeCompleto": "Zebedeu Abraão",
+           "cpf": "02100000000",
+           "telefone": "47-9999-5555",
+           "endereco": {
+               "id": 1,
+               "cep": "00000-000",
+               "logradouro": "Rua Israel",
+               "numero": "7",
+               "complemento": "Próximo à igreja",
+               "bairro": "Europa",
+               "localidade": "Blumenau",
+               "uf": "SC",
+               "ibge": "",
+               "gia": "",
+               "ddd": "",
+               "siafi": ""
+           }
+       }
+   ]
 
 #### Método DELETE (Excluir)
 - **URL**: [http://localhost:9000/pessoas/{id}](http://localhost:9000/pessoas{id})
@@ -165,7 +165,7 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
       }
   }
 
-## Documentação
+## :books: Documentação
 
 #### JavaDoc
 ![image](https://github.com/user-attachments/assets/48981ff8-d8bb-47d5-8b9d-e424638ab199)
@@ -187,9 +187,16 @@ Este projeto foi desenvolvido utilizando Java com Spring Boot para o backend e A
 #### Lista 
 ![image](https://github.com/user-attachments/assets/bcddc1e6-ca19-4c21-9ec4-43eafa978d30)
 
-#### Relatorio CSV
-![image](https://github.com/user-attachments/assets/5e2bec81-fe95-4c12-95c9-c307f885f8ca)
+#### Detalhes e edição
+![image](https://github.com/user-attachments/assets/f9390618-a25a-4b2b-9972-4432fd350e99)
+![image](https://github.com/user-attachments/assets/e817316d-6d0c-4db0-b3b2-054c287ff112)
 
-## Autor
+#### Cadastrar pessoa
+![image](https://github.com/user-attachments/assets/b09b106e-7649-47d5-87ed-b0d088f52062)
+
+#### Relatorio CSV
+![image](https://github.com/user-attachments/assets/bd9e5d17-d6f3-48ed-87e8-f2a845aff9d6)
+
+## :raising_hand_woman: Autor
 * Camila Alves
 
