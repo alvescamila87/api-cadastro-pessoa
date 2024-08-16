@@ -9,6 +9,7 @@ import br.com.camila.cadastropessoa.model.Endereco;
 import br.com.camila.cadastropessoa.repositories.EnderecoRepository;
 import br.com.camila.cadastropessoa.repositories.PessoaRepository;
 import br.com.camila.cadastropessoa.utils.ValidaCPF;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ import br.com.camila.cadastropessoa.model.Pessoa;
  * @since V1
  */
 @Service
+//@RequiredArgsConstructor
 public class PessoaServiceImpl implements IPessoaService {
 
 	@Autowired
@@ -41,6 +43,7 @@ public class PessoaServiceImpl implements IPessoaService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+
 
 	/**
 	 * Recupera todas as pessoas do sistema.
@@ -51,6 +54,7 @@ public class PessoaServiceImpl implements IPessoaService {
 	public List<Pessoa> recuperarTodasPessoas() {
 		return pessoaRepository.findAll();
 	}
+	// PessoaDTO: entra e saida DTO e não Entidade
 
 	/**
 	 * Recupera uma pessoa específica pelo seu identificador.
@@ -60,12 +64,16 @@ public class PessoaServiceImpl implements IPessoaService {
 	 */
 	@Override
 	public Pessoa recuperarPessoaPorId(Long idPessoa) {
-		Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
+		//var pessoaPesquisada = pessoaRepository.findById(idPessoa).orElseThrow(() -> new IllegalArgumentException("MSG pessoa não encontrada");
 
+		 Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
+
+
+		// não precisaria disso com o var
 		if(pessoaPesquisada.isPresent()) {
 			return pessoaPesquisada.get();
 		}
-		return null;
+		return null; // deveria ter feito uma exception not found
 	}
 
 	/**
@@ -90,11 +98,14 @@ public class PessoaServiceImpl implements IPessoaService {
 	public Pessoa atualizar(Long idPessoa, PessoaDTO pessoa) {
 		Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
 
+		//var pessoaPesquisada = recuperarPessoaPorId(idPessoa);
+
+		// NÃO PRECISARIA
 		if(pessoaPesquisada.isPresent()) {
 			return salvarPessoaComCEP(pessoa);
 		}
-        return null;
-    }
+		return null;
+	}
 
 	/**
 	 * Exclui uma pessoa do sistema.
@@ -105,6 +116,9 @@ public class PessoaServiceImpl implements IPessoaService {
 	public void excluirPessoa(Long idPessoa) {
 		Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
 
+		//var pessoaPesquisada = recuperarPessoaPorId(idPessoa);
+
+		// NÃO PRECISARIA
 		if(pessoaPesquisada.isPresent()) {
 			pessoaRepository.deleteById(idPessoa);
 		}
@@ -135,6 +149,6 @@ public class PessoaServiceImpl implements IPessoaService {
 		novaPessoa.setEndereco(novoEndereco);
 
 		pessoaRepository.save(novaPessoa);
-        return novaPessoa;
+		return novaPessoa;
 	}
 }

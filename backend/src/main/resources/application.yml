@@ -1,35 +1,3 @@
-server:
-  port: 9000
-  error:
-    whitelabel:
-      enabled: true
-
 spring:
-  datasource:
-    #url: ${DATABASE_CONNECTION_URL:jdbc:postgresql://localhost:5432/db_pessoas}
-    url: jdbc:postgresql://db:5432/db_pessoas
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
-
-  flyway:
-    enabled: true
-    baseline-on-migrate: true
-    locations: classpath:migration
-
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    path: /swagger-ui.html
-
-
+  profiles:
+    active: test
