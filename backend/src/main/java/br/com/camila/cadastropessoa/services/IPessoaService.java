@@ -1,7 +1,6 @@
 package br.com.camila.cadastropessoa.services;
 
 import java.util.List;
-
 import br.com.camila.cadastropessoa.dto.PessoaDTO;
 import br.com.camila.cadastropessoa.model.Pessoa;
 /**
@@ -39,16 +38,16 @@ public interface IPessoaService {
 	 * @param pessoa o objeto {@link PessoaDTO} contendo os dados da pessoa a ser salva
 	 * @return a pessoa salva, com o ID gerado pelo sistema
 	 */
-	Pessoa salvarPessoa(PessoaDTO pessoa);
+	PessoaDTO salvarPessoa(PessoaDTO pessoa);
 
 	/**
 	 * Atualiza os dados de uma pessoa existente.
 	 *
 	 * @param idPessoa o identificador da pessoa a ser atualizada
-	 * @param pessoa o objeto {@link PessoaDTO} contendo os dados atualizados da pessoa
+	 * @param pessoa   o objeto {@link PessoaDTO} contendo os dados atualizados da pessoa
 	 * @return a pessoa atualizada
 	 */
-	Pessoa atualizar(Long idPessoa, PessoaDTO pessoa);
+	PessoaDTO atualizar(Long idPessoa, PessoaDTO pessoa);
 
 	/**
 	 * Exclui uma pessoa do sistema.

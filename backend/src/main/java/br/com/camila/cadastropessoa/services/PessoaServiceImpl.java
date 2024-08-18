@@ -1,7 +1,6 @@
 package br.com.camila.cadastropessoa.services;
 
 import java.util.List;
-import java.util.Optional;
 
 
 import br.com.camila.cadastropessoa.dto.PessoaDTO;
@@ -10,11 +9,11 @@ import br.com.camila.cadastropessoa.repositories.EnderecoRepository;
 import br.com.camila.cadastropessoa.repositories.PessoaRepository;
 import br.com.camila.cadastropessoa.utils.ValidaCPF;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.camila.cadastropessoa.model.Pessoa;
+
 
 /**
  * Implementação do serviço para a entidade {@link Pessoa}.
@@ -35,104 +34,102 @@ import br.com.camila.cadastropessoa.model.Pessoa;
  * @since V1
  */
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class PessoaServiceImpl implements IPessoaService {
 
-	@Autowired
-	private PessoaRepository pessoaRepository;
+	private final PessoaRepository pessoaRepository;
 
-	@Autowired
-	private EnderecoRepository enderecoRepository;
+	private final EnderecoRepository enderecoRepository;
 
 
 	/**
-	 * Recupera todas as pessoas do sistema.
+	 * Recupera todas as pessoas cadastradas no sistema.
 	 *
-	 * @return uma lista contendo todas as pessoas cadastradas
+	 * @return uma lista contendo todas as pessoas
 	 */
 	@Override
 	public List<Pessoa> recuperarTodasPessoas() {
 		return pessoaRepository.findAll();
 	}
-	// PessoaDTO: entra e saida DTO e não Entidade
 
 	/**
-	 * Recupera uma pessoa específica pelo seu identificador.
+	 * Recupera uma pessoa específica pelo seu ID.
 	 *
 	 * @param idPessoa o ID da pessoa a ser recuperada
 	 * @return a pessoa correspondente ao ID fornecido
+	 * @throws IllegalArgumentException se a pessoa com o ID fornecido não for encontrada
 	 */
 	@Override
 	public Pessoa recuperarPessoaPorId(Long idPessoa) {
-		//var pessoaPesquisada = pessoaRepository.findById(idPessoa).orElseThrow(() -> new IllegalArgumentException("MSG pessoa não encontrada");
-
-		 Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
-
-
-		// não precisaria disso com o var
-		if(pessoaPesquisada.isPresent()) {
-			return pessoaPesquisada.get();
-		}
-		return null; // deveria ter feito uma exception not found
+		return pessoaRepository.findById(idPessoa)
+                .orElseThrow(() -> new IllegalArgumentException("A Pessoa de ID: " + idPessoa + " não foi encontrada."));
 	}
 
 	/**
 	 * Salva uma nova pessoa no sistema. Este método também salva o endereço associado à pessoa.
 	 *
-	 * @param pessoa o objeto {@link PessoaDTO} contendo os dados da pessoa a ser salva
-	 * @return a pessoa salva, com o ID gerado pelo sistema
+	 * @param pessoaDTO o objeto {@link PessoaDTO} contendo os dados da pessoa a ser salva
+	 * @return o objeto {@link PessoaDTO} da pessoa salva, com o ID gerado pelo sistema
+	 * @throws IllegalArgumentException se o CPF informado for inválido
+	 * @throws DataIntegrityViolationException se o CPF informado já estiver cadastrado
 	 */
 	@Override
-	public Pessoa salvarPessoa(PessoaDTO pessoa) {
-		return salvarPessoaComCEP(pessoa);
+	public PessoaDTO salvarPessoa(PessoaDTO pessoaDTO) {
+		return salvarPessoaComCEP(pessoaDTO);
 	}
 
 	/**
 	 * Atualiza os dados de uma pessoa existente. Este método também atualiza o endereço associado à pessoa.
 	 *
-	 * @param idPessoa o identificador da pessoa a ser atualizada
-	 * @param pessoa o objeto {@link PessoaDTO} contendo os dados atualizados da pessoa
-	 * @return a pessoa atualizada
+	 * <p>
+	 * Este método recupera a pessoa com o ID fornecido, atualiza seus dados com base nas
+	 * informações presentes no objeto {@link PessoaDTO}, e salva as alterações no repositório. O método
+	 * também realiza a validação do CPF e atualiza o endereço associado à pessoa.
+	 * </p>
+	 *
+	 * @param idPessoa  o ID da pessoa a ser atualizada
+	 * @param pessoaDTO o objeto {@link PessoaDTO} contendo os dados atualizados da pessoa
+	 * @return o objeto {@link PessoaDTO} atualizado e salvo no repositório
+	 * @throws IllegalArgumentException se a pessoa com o ID fornecido não for encontrada
 	 */
 	@Override
-	public Pessoa atualizar(Long idPessoa, PessoaDTO pessoa) {
-		Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
+	public PessoaDTO atualizar(Long idPessoa, PessoaDTO pessoaDTO) {
+		Pessoa pessoaPesquisada = recuperarPessoaPorId(idPessoa);
 
-		//var pessoaPesquisada = recuperarPessoaPorId(idPessoa);
-
-		// NÃO PRECISARIA
-		if(pessoaPesquisada.isPresent()) {
-			return salvarPessoaComCEP(pessoa);
-		}
-		return null;
+		return salvarPessoaComCEP(pessoaDTO);
 	}
 
 	/**
-	 * Exclui uma pessoa do sistema.
+	 * Exclui uma pessoa do sistema com base no ID fornecido.
+	 * <p>
+	 * Este método recupera a pessoa com o identificador fornecido e a exclui do repositório de pessoas.
+	 * Caso a pessoa não seja encontrada, será lançada uma exceção durante o processo de recuperação.
+	 * </p>
 	 *
-	 * @param idPessoa o identificador da pessoa a ser excluída
+	 * @param idPessoa o ID da pessoa a ser excluída
+	 * @throws IllegalArgumentException se a pessoa com o ID fornecido não for encontrada
 	 */
 	@Override
 	public void excluirPessoa(Long idPessoa) {
-		Optional<Pessoa> pessoaPesquisada = pessoaRepository.findById(idPessoa);
+		Pessoa pessoaPesquisada = recuperarPessoaPorId(idPessoa);
 
-		//var pessoaPesquisada = recuperarPessoaPorId(idPessoa);
-
-		// NÃO PRECISARIA
-		if(pessoaPesquisada.isPresent()) {
-			pessoaRepository.deleteById(idPessoa);
-		}
+		pessoaRepository.delete(pessoaPesquisada);
 	}
 
 	/**
-	 * Salva uma nova pessoa com o endereço associado e valida o CPF da pessoa.
+	 * Salva uma nova pessoa no sistema, incluindo a validação do CPF e a persistência do endereço associado.
+	 * <p>
+	 * Este método cria uma nova instância de {@link Pessoa} com os dados fornecidos no {@link PessoaDTO}.
+	 * Valida o CPF da pessoa e formata-o corretamente antes de persistir a pessoa e o endereço no banco de dados.
+	 * Após salvar a pessoa, um novo {@link PessoaDTO} é retornado com os dados atualizados.
+	 * </p>
 	 *
 	 * @param pessoaDTO o objeto {@link PessoaDTO} contendo os dados da pessoa a ser salva
-	 * @return a pessoa salva, com o identificador gerado pelo sistema
-	 * @throws IllegalArgumentException se o CPF informado for inválido
-	 * @throws DataIntegrityViolationException se o CPF informado for já estiver cadastrado
+	 * @return o objeto {@link PessoaDTO} contendo os dados da pessoa salva, com o ID gerado pelo sistema
+	 * @throws IllegalArgumentException se o CPF informado no {@link PessoaDTO} for inválido
+	 * @throws DataIntegrityViolationException se o CPF informado já estiver cadastrado no sistema
 	 */
-	private Pessoa salvarPessoaComCEP(PessoaDTO pessoaDTO){
+	private PessoaDTO salvarPessoaComCEP(PessoaDTO pessoaDTO){
 		Pessoa novaPessoa = new Pessoa();
 		novaPessoa.setId(pessoaDTO.getId());
 		novaPessoa.setNomeCompleto(pessoaDTO.getNomeCompleto());
@@ -149,6 +146,14 @@ public class PessoaServiceImpl implements IPessoaService {
 		novaPessoa.setEndereco(novoEndereco);
 
 		pessoaRepository.save(novaPessoa);
-		return novaPessoa;
+
+		PessoaDTO novaPessoaDTO = new PessoaDTO();
+		novaPessoaDTO.setId(novaPessoa.getId());
+		novaPessoaDTO.setNomeCompleto(novaPessoa.getNomeCompleto());
+		novaPessoaDTO.setCpf(novaPessoa.getCpf());
+		novaPessoaDTO.setTelefone(novaPessoaDTO.getTelefone());
+		novaPessoaDTO.setEndereco(novaPessoa.getEndereco());
+
+		return novaPessoaDTO;
 	}
 }
