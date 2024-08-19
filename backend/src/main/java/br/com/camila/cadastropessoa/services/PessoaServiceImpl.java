@@ -157,7 +157,7 @@ public class PessoaServiceImpl implements IPessoaService {
 		enderecoAtual.setUf(pessoaDTO.getEndereco().getUf());
 
 		Endereco novoEndereco = enderecoRepository.save(enderecoAtual);
-		novaPessoa.setEndereco(novoEndereco);
+		novaPessoa.setEndereco(enderecoAtual);
 
 		pessoaRepository.save(novaPessoa);
 
