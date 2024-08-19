@@ -1,9 +1,7 @@
 package br.com.camila.cadastropessoa.repositories;
 
-import br.com.camila.cadastropessoa.model.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import br.com.camila.cadastropessoa.model.Pessoa;
 
 /**

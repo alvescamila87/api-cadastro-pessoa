@@ -1,5 +1,6 @@
 package br.com.camila.cadastropessoa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,11 +32,12 @@ public class Pessoa {
 
 	/**
 	 * Endereço associado à pessoa.
-	 * Este é um relacionamento de muitos-para-um com a entidade {@code Endereco}.
+	 * Este é um relacionamento de um-para-um com a entidade {@code Endereco}.
 	 * A coluna que faz a referência ao endereço é {@code endereco_id}.
 	 */
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "endereco_id")
+	@JsonIgnoreProperties("pessoa")
 	private Endereco endereco;
 
 }

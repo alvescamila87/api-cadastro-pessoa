@@ -142,7 +142,21 @@ public class PessoaServiceImpl implements IPessoaService {
 		novaPessoa.setCpf(cpfFormatado);
 		novaPessoa.setTelefone(pessoaDTO.getTelefone());
 
-		Endereco novoEndereco = enderecoRepository.save(pessoaDTO.getEndereco());
+		Endereco enderecoAtual = novaPessoa.getEndereco();
+
+		if (enderecoAtual == null) {
+			enderecoAtual = new Endereco();
+		}
+
+		enderecoAtual.setCep(pessoaDTO.getEndereco().getCep());
+		enderecoAtual.setLogradouro(pessoaDTO.getEndereco().getLogradouro());
+		enderecoAtual.setNumero(pessoaDTO.getEndereco().getNumero());
+		enderecoAtual.setComplemento(pessoaDTO.getEndereco().getComplemento());
+		enderecoAtual.setBairro(pessoaDTO.getEndereco().getBairro());
+		enderecoAtual.setLocalidade(pessoaDTO.getEndereco().getLocalidade());
+		enderecoAtual.setUf(pessoaDTO.getEndereco().getUf());
+
+		Endereco novoEndereco = enderecoRepository.save(enderecoAtual);
 		novaPessoa.setEndereco(novoEndereco);
 
 		pessoaRepository.save(novaPessoa);
